@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lancer Orthodontics — Precisión .0005"</title>
+  <meta name="description"
+    content="Suministros ortodónticos premium. Brackets metálicos fresados con tolerancias de hasta .0005 pulgadas. Más de 55 años de experiencia.">
+
+  <!-- Tipografía editorial: display serif + grotesque -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Three.js + GLTFLoader -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- ================= NAV ================= -->
+  <header class="nav">
+    <div class="nav__inner">
+      <a href="#" class="nav__logo">
+        <!--
+        <span class="nav__logo-mark">L</span>
+        -->
+        <span class="nav__logo-text"><img class="lancer-logo" src="img/lancerlogo.png" alt="Lancer Logo"></span>
+      </a>
+      <nav class="nav__links">
+        <a href="#productos">Productos</a>
+        <a href="#precision">Precisión</a>
+        <a href="#sistemas">Sistemas</a>
+        <a href="#historia">Historia</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <div class="nav__actions">
+        <a href="#" class="nav__lang">ES / EN</a>
+        <a href="#contacto" class="btn btn--primary btn--sm">Cotizar</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="hero__grid-overlay"></div>
+
+    <div class="hero__container">
+      <div class="hero__copy">
+        <div class="hero__eyebrow">
+          <span class="dot"></span>
+          <span>Desde 1967 · USA - Mexico</span>
+        </div>
+        <h1 class="hero__title">
+          Brackets fresados con tolerancia de <em>.0005</em> pulgadas.
+        </h1>
+        <p class="hero__lead">
+          Más de 55 años fabricando brackets, tubos bucales y bandas con un grado de
+          precisión sin igual. Diseño, control de manufactura y consistencia clínica
+          en cada pieza.
+        </p>
+        <div class="hero__ctas">
+          <a href="#productos" class="btn btn--primary">
+            Ver catálogo
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </a>
+          <a href="#precision" class="btn btn--ghost">Cómo lo logramos</a>
+        </div>
+
+        <ul class="hero__stats">
+          <li>
+            <strong>55+</strong>
+            <span>años de I+D</span>
+          </li>
+          <li>
+            <strong>.0005"</strong>
+            <span>tolerancia en ranura</span>
+          </li>
+          <li>
+            <strong>60+</strong>
+            <span>países atendidos</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Visor 3D del bracket -->
+      <div class="hero__viewer">
+        <div class="hero__viewer-frame">
+          <div id="bracket-3d" class="bracket-canvas" data-model="models/bracket.glb" data-auto-rotate="true">
+
+            <div class="badge badge--blue">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+              </svg>
+              Bracket Lancer Evo · MIM fresado
+            </div>
+
+            <div class="badge badge--green">
+              <span class="badge__bullet"></span>
+              .0005" Precisión
+            </div>
+
+            <div class="bracket-canvas__hint">
+              Arrastra para rotar · Scroll para zoom
+            </div>
+
+            <div class="bracket-canvas__loader" id="bracket-loader">
+              <div class="spinner"></div>
+              <p>Cargando modelo 3D...</p>
+            </div>
+          </div>
+
+          <!-- Líneas medidoras decorativas -->
+          <div class="hero__viewer-measure hero__viewer-measure--top">
+            <span class="line"></span>
+            <span class="tag">Slot · 0.022"</span>
+            <span class="line"></span>
+          </div>
+          <div class="hero__viewer-measure hero__viewer-measure--side">
+            <span class="line"></span>
+            <span class="tag">MIM + fresado</span>
+            <span class="line"></span>
+          </div>
+        </div>
+
+        <p class="hero__viewer-caption">
+          Modelo interactivo · Sistema Sinterline V-Slot
+        </p>
+      </div>
+    </div>
+
+    <!-- Marquee de marcas/normas -->
+    <div class="marquee">
+      <div class="marquee__track">
+        <span>ISO 13485</span><span>·</span>
+        <span>FDA Registered</span><span>·</span>
+        <span>CE Marked</span><span>·</span>
+        <span>Lancer</span><span>·</span>
+        <span>Distribución global</span><span>·</span>
+        <span>Avanti Medical Technologies</span><span>·</span>
+        <span>ISO 13485</span><span>·</span>
+        <span>FDA Registered</span><span>·</span>
+        <span>CE Marked</span><span>·</span>
+        <span>Lancer</span><span>·</span>
+        <span>Distribución global</span><span>·</span>
+        <span>Avanti Medical Technologies</span><span>·</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PRECISIÓN ================= -->
+  <section class="precision" id="precision">
+    <div class="container precision__grid">
+      <div class="precision__intro">
+        <span class="eyebrow eyebrow--dark">01 · Lancer es Precisión</span>
+        <h2 class="h-display">
+          El MIM produce brackets.<br>
+          El <em>fresado</em> los vuelve <em>precisos</em>.
+        </h2>
+        <p>
+          El moldeo por inyección de metal (MIM) es excelente para producir brackets,
+          pero por sí solo puede dejar tolerancias variables. Por eso todos los
+          brackets Lancer son <strong>fresados</strong> después del MIM, otorgando
+          un grado de precisión sin igual con tolerancias de hasta <strong>.0005"</strong>.
+        </p>
+      </div>
+
+      <div class="precision__cards">
+        <article class="pcard">
+          <span class="pcard__num">A</span>
+          <h3>Paredes paralelas</h3>
+          <p>Dimensiones exactas en las ranuras eliminan preocupaciones de convergencia o divergencia.</p>
+        </article>
+        <article class="pcard pcard--accent">
+          <span class="pcard__num">B</span>
+          <h3>Superficies suaves</h3>
+          <p style="color: white;">Acabado interno que reduce la fricción del alambre a niveles mínimos durante el
+            deslizamiento.</p>
+        </article>
+        <article class="pcard">
+          <span class="pcard__num">C</span>
+          <h3>Tolerancia .0005"</h3>
+          <p>Entregamos tolerancias tan precisas como cinco diez-milésimas de pulgada en brackets y tubos.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PRODUCTOS / SISTEMAS ================= -->
+  <section class="products" id="productos">
+    <div class="container">
+      <header class="products__header">
+        <span class="eyebrow">02 · Línea de productos</span>
+        <h2 class="h-display">Un sistema completo para cada caso clínico.</h2>
+      </header>
+
+      <div class="products__grid">
+        <article class="product-card product-card--feature">
+          <div class="product-card__tag">Destacado</div>
+          <!--
+          <h3>Sinterline</h3>
+          <p class="product-card__desc">
+            Sistema de bracket con V-Slot vertical adicional. Máxima flexibilidad
+            para casos exigentes con fricción mínima.
+          </p>
+          -->
+          <h3>Lancer EVO</h3>
+          <p class="product-card__desc">
+            Sistema de bracket con tolerancias de .0005. Máxima flexibilidad
+            para casos exigentes con fricción mínima.
+          </p>
+          <ul class="product-card__features">
+            <li>Slot .018" y .022"</li>
+            <li>Tolerancia .0005</li>
+            <li>Base con malla 80-gauge</li>
+          </ul>
+          <a href="#" class="link-arrow">Ver línea Sinterline →</a>
+        </article>
+
+        <article class="product-card">
+          <h3>Metal Brackets</h3>
+          <p class="product-card__desc">
+            Brackets de acero inoxidable fresados, diseñados para tratamientos
+            efectivos y duraderos.
+          </p>
+          <a href="#" class="link-arrow">Explorar →</a>
+        </article>
+
+        <article class="product-card">
+          <h3>Aesthetic Brackets</h3>
+          <p class="product-card__desc">
+            Brackets estéticos cerámicos y de porcelana con la misma precisión .0005".
+          </p>
+          <a href="#" class="link-arrow">Explorar →</a>
+        </article>
+
+        <article class="product-card">
+          <h3>Buccal Tubes</h3>
+          <p class="product-card__desc">
+            Weldable, bondable, convertible y no-convertible. Soldados sin cargo.
+          </p>
+          <a href="#" class="link-arrow">Explorar →</a>
+        </article>
+
+        <article class="product-card">
+          <h3>Self-Ligating (SLB)</h3>
+          <p class="product-card__desc">
+            Diseño que simplifica el procedimiento clínico con balance entre
+            eficiencia, comodidad y precisión.
+          </p>
+          <a href="#" class="link-arrow">Explorar →</a>
+        </article>
+
+        <article class="product-card">
+          <h3>Bandas y Alambres</h3>
+          <p class="product-card__desc">
+            Bandas anatómicas para molares y bicúspides. Alambres NiTi, acero y TMA.
+          </p>
+          <a href="#" class="link-arrow">Explorar →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= DETALLE TÉCNICO ================= -->
+  <section class="spec" id="sistemas">
+    <div class="container spec__grid">
+      <div class="spec__copy">
+        <span class="eyebrow eyebrow--light">03 · Especificaciones</span>
+        <h2 class="h-display h-display--light">
+          Cada ranura, medida.<br>Cada pared, paralela.
+        </h2>
+        <p class="spec__lead">
+          Nuestro proceso combina MIM (Metal Injection Molding) con fresado CNC
+          de alta precisión. Cada lote es inspeccionado bajo controles ISO 13485
+          antes de salir de Carlsbad.
+        </p>
+
+        <dl class="spec__list">
+          <div>
+            <dt>Material</dt>
+            <dd>Acero inoxidable 17-4 PH grado médico</dd>
+          </div>
+          <div>
+            <dt>Tolerancia de ranura</dt>
+            <dd>±.0005 pulgadas (12.7 µm)</dd>
+          </div>
+          <div>
+            <dt>Acabado superficial</dt>
+            <dd>Ra ≤ 0.4 µm en superficies de contacto</dd>
+          </div>
+          <div>
+            <dt>Fuerza de adhesión</dt>
+            <dd>Malla 80-gauge, retención 9-12 MPa</dd>
+          </div>
+          <div>
+            <dt>Certificaciones</dt>
+            <dd>ISO 13485 · FDA · CE Mark · COFEPRIS</dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="spec__viz">
+        <div class="spec__ring"></div>
+        <div class="spec__ring spec__ring--2"></div>
+        <div class="spec__ring spec__ring--3"></div>
+        <div class="spec__center">
+          <span class="spec__center-num">.0005"</span>
+          <span class="spec__center-label">Tolerancia</span>
+        </div>
+        <span class="spec__pin spec__pin--1">CNC</span>
+        <span class="spec__pin spec__pin--2">MIM</span>
+        <span class="spec__pin spec__pin--3">QC 100%</span>
+        <span class="spec__pin spec__pin--4">ISO</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= HISTORIA / CTA ================= -->
+  <section class="story" id="historia">
+    <div class="container story__grid">
+      <div>
+        <span class="eyebrow">04 · Historia</span>
+        <h2 class="h-display">
+          Una marca histórica.<br>Una alianza global.
+        </h2>
+      </div>
+      <div class="story__copy">
+        <p>
+          <strong>Lancer Orthodontics de México</strong> nació de la unión entre
+          <em>Lancer Orthodontics</em> — marca estadounidense fundada en 1967 —
+          y <em>Avanti Medical Technologies</em>, empresa mexicana especializada
+          en la producción y distribución de dispositivos médicos de alta calidad.
+        </p>
+        <p>
+          El resultado: una red internacional con más de 55 años de I+D, distribución
+          ágil en LATAM y la misma obsesión por la precisión que define a Lancer
+          desde su primer bracket.
+        </p>
+        <a href="#contacto" class="link-arrow link-arrow--lg">Conoce al equipo →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA FINAL ================= -->
+  <section class="cta" id="contacto">
+    <div class="container">
+      <div class="cta__box">
+        <span class="eyebrow eyebrow--light">Para clínicas y distribuidores</span>
+        <h2 class="h-display h-display--light">
+          ¿Listo para tratar con<br>confianza milimétrica?
+        </h2>
+        <p>
+          Hablemos de tu volumen, tus casos y los sistemas que mejor encajan con tu
+          práctica. Atención personalizada para ortodoncistas y distribuidores en
+          México, LATAM y el resto del mundo.
+        </p>
+        <div class="cta__actions">
+          <a href="#" class="btn btn--white">Solicitar cotización</a>
+          <a href="#" class="btn btn--ghost-light">Descargar catálogo PDF</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <div class="nav__logo">
+          <!--
+          <span class="nav__logo-mark">L</span>
+          <span class="nav__logo-text">LANCER<small>ORTHODONTICS</small></span>
+        -->
+          <img class="lancer-logo" src="img/lancerlogo.png" alt="Lancer Logo Footer">
+        </div>
+        <p>
+          Calle Saturno 20, PIMSA I,<br>
+          Mexicali, Baja California 21210 · Mexico
+        </p>
+      </div>
+      <div>
+        <h4>Productos</h4>
+        <ul>
+          <li><a href="#">Metal Brackets</a></li>
+          <li><a href="#">Aesthetic Brackets</a></li>
+          <li><a href="#">Sinterline</a></li>
+          <li><a href="#">Self-Ligating</a></li>
+          <li><a href="#">Buccal Tubes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="#">Historia</a></li>
+          <li><a href="#">Tecnología</a></li>
+          <li><a href="#">Certificaciones</a></li>
+          <li><a href="#">Soporte clínico</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="#">+1 (760) 438-1110</a></li>
+          <li><a href="#">info@lancerortho.com</a></li>
+          <li><a href="#">Convertirse en distribuidor</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <small>© 1967–2026 Lancer Orthodontics, Inc. · Todos los derechos reservados.</small>
+      <small>ISO 13485 · FDA · CE</small>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
