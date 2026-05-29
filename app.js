@@ -34,6 +34,13 @@
       this.minDistance = 1.8;
       this.maxDistance = 6;
 
+      this.labelRenderer = null;
+      this.slotLabel     = null;
+      this.mimLabel      = null;
+      this.cameraTargetY = 0;
+      this.isZoomed      = false;
+      this.defaults = { cameraDistance: 4.2, cameraTargetY: 0, targetRotationX: 0.45 };
+
       this.init();
     }
 
@@ -71,6 +78,7 @@
       this.scene.environment = this.envMap;
 
       this.setupLights();
+      this.setupLabelRenderer();
       this.setupInteractions();
       this.loadModel();
       this.animate();
@@ -118,6 +126,67 @@
       const top = new THREE.DirectionalLight(0xffffff, 0.3);
       top.position.set(0, 10, 0);
       this.scene.add(top);
+    }
+
+    setupLabelRenderer() {
+      if (typeof THREE.CSS2DRenderer === 'undefined') {
+        console.warn('[Lancer] CSS2DRenderer no disponible — labels omitidos');
+        return;
+      }
+      this.labelRenderer = new THREE.CSS2DRenderer();
+      this.labelRenderer.setSize(this.container.clientWidth, this.container.clientHeight);
+      const dom = this.labelRenderer.domElement;
+      dom.className = 'bracket-labels-root';
+      dom.style.position = 'absolute';
+      dom.style.top = '0';
+      dom.style.left = '0';
+      dom.style.pointerEvents = 'none';
+      this.container.appendChild(dom);
+    }
+
+    addLabels() {
+      if (!this.labelRenderer) return;
+
+      const slotDiv = document.createElement('div');
+      slotDiv.className = 'label-slot';
+      slotDiv.innerHTML = `
+        <div class="label-slot__tag">SLOT · 0.022&Prime;</div>
+        <div class="label-slot__leader"></div>
+      `;
+      this.slotLabel = new THREE.CSS2DObject(slotDiv);
+      this.slotLabel.position.set(0, 0.4, 0.2);
+      this.mainObject.add(this.slotLabel);
+
+      const mimDiv = document.createElement('div');
+      mimDiv.className = 'label-mim';
+      mimDiv.innerHTML = `
+        <div class="label-mim__leader"></div>
+        <div class="label-mim__badge">MIM + Fresado</div>
+      `;
+      this.mimLabel = new THREE.CSS2DObject(mimDiv);
+      this.mimLabel.position.set(0.5, -0.4, 0.2);
+      this.mainObject.add(this.mimLabel);
+
+      const badgeEl = mimDiv.querySelector('.label-mim__badge');
+      badgeEl.addEventListener('click', (e) => { e.stopPropagation(); this._handleMimClick(badgeEl); });
+      badgeEl.addEventListener('touchend', (e) => { e.preventDefault(); e.stopPropagation(); this._handleMimClick(badgeEl); }, { passive: false });
+    }
+
+    _handleMimClick(badgeEl) {
+      if (!window.gsap) { console.warn('[Lancer] GSAP no disponible'); return; }
+      if (!this.isZoomed) {
+        gsap.to(this, { duration: 1.1, ease: 'power3.inOut',
+          cameraDistance: 2.5, cameraTargetY: -0.3, targetRotationX: 0.6 });
+        badgeEl.classList.add('is-zoomed');
+        this.isZoomed = true;
+      } else {
+        gsap.to(this, { duration: 1.1, ease: 'power3.inOut',
+          cameraDistance: this.defaults.cameraDistance,
+          cameraTargetY: this.defaults.cameraTargetY,
+          targetRotationX: this.defaults.targetRotationX });
+        badgeEl.classList.remove('is-zoomed');
+        this.isZoomed = false;
+      }
     }
 
     setupInteractions() {
@@ -262,6 +331,7 @@
       this.mainObject = group;
       this.scene.add(group);
 
+      this.addLabels();
       this.hideLoader();
     }
 
@@ -319,6 +389,7 @@
       this.mainObject = group;
       this.scene.add(group);
 
+      this.addLabels();
       this.hideLoader();
     }
 
@@ -345,8 +416,12 @@
 
         // Smooth zoom
         this.camera.position.z += (this.cameraDistance - this.camera.position.z) * 0.08;
+        this.camera.lookAt(0, this.cameraTargetY, 0);
 
         this.renderer.render(this.scene, this.camera);
+        if (this.labelRenderer) {
+          this.labelRenderer.render(this.scene, this.camera);
+        }
       };
       frame();
     }
@@ -357,13 +432,14 @@
       this.camera.aspect = w / h;
       this.camera.updateProjectionMatrix();
       this.renderer.setSize(w, h);
+      if (this.labelRenderer) { this.labelRenderer.setSize(w, h); }
     }
   }
 
   // Init
   function start() {
     document.querySelectorAll('.bracket-canvas').forEach((el) => {
-      new BracketViewer(el);
+      el.__viewer = new BracketViewer(el);
     });
   }
 
