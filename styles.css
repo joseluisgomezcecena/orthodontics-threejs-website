@@ -1266,3 +1266,82 @@ button {
     justify-content: center;
   }
 }
+
+/* ============================================
+   3D SPATIAL LABELS — CSS2DRenderer overlay
+   ============================================ */
+
+.bracket-labels-root {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.label-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  pointer-events: none;
+}
+
+.label-slot__tag {
+  font-family: var(--font-sans);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(14, 19, 32, 0.18);
+  padding: 4px 8px;
+  white-space: nowrap;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.label-slot__leader {
+  width: 1px;
+  height: 20px;
+  background: rgba(14, 19, 32, 0.25);
+  margin-left: 12px;
+}
+
+.label-mim {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.label-mim__badge {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--blue);
+  padding: 6px 10px;
+  white-space: nowrap;
+  box-shadow: 0 6px 16px -6px rgba(38, 105, 240, 0.55);
+  transition: background 0.18s ease;
+  user-select: none;
+}
+
+.label-mim__badge:hover {
+  background: var(--blue-deep, #1a50c4);
+}
+
+.label-mim__badge.is-zoomed {
+  background: var(--ink);
+  box-shadow: none;
+}
+
+.label-mim__leader {
+  width: 1px;
+  height: 16px;
+  background: rgba(38, 105, 240, 0.5);
+  margin-left: 10px;
+}
