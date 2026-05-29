@@ -197,11 +197,13 @@
         this.isMouseDown = true;
         this.mouseX = e.clientX;
         this.mouseY = e.clientY;
+        this.container.classList.add('is-dragging');
       });
       el.addEventListener('mouseenter', () => { this.isHovering = true; });
       el.addEventListener('mouseleave', () => {
         this.isHovering = false;
         this.isMouseDown = false;
+        this.container.classList.remove('is-dragging');
       });
       el.addEventListener('mousemove', (e) => {
         if (!this.isMouseDown) return;
@@ -212,7 +214,10 @@
         this.mouseX = e.clientX;
         this.mouseY = e.clientY;
       });
-      window.addEventListener('mouseup', () => { this.isMouseDown = false; });
+      window.addEventListener('mouseup', () => {
+        this.isMouseDown = false;
+        this.container.classList.remove('is-dragging');
+      });
 
       // Wheel zoom
       el.addEventListener('wheel', (e) => {
@@ -228,6 +233,7 @@
           this.isHovering = true;
           this.mouseX = e.touches[0].clientX;
           this.mouseY = e.touches[0].clientY;
+          this.container.classList.add('is-dragging');
         }
       }, { passive: true });
       el.addEventListener('touchmove', (e) => {
@@ -243,6 +249,7 @@
       el.addEventListener('touchend', () => {
         this.isMouseDown = false;
         this.isHovering = false;
+        this.container.classList.remove('is-dragging');
       });
     }
 

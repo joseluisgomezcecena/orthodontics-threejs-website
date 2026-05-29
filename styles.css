@@ -1195,6 +1195,12 @@ button {
   inset: 0;
   pointer-events: none;
   overflow: hidden;
+  transform: translateZ(0);   /* promote to same GPU layer as canvas */
+  will-change: transform;
+}
+
+.bracket-canvas.is-dragging .label-mim {
+  pointer-events: none;
 }
 
 .label-slot {
@@ -1202,6 +1208,7 @@ button {
   flex-direction: column;
   align-items: flex-start;
   pointer-events: none;
+  will-change: transform;
 }
 
 .label-slot__tag {
@@ -1232,6 +1239,7 @@ button {
   align-items: flex-start;
   pointer-events: auto;
   cursor: pointer;
+  will-change: transform;
 }
 
 .label-mim__badge {
